@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_parsing_utils.c                              :+:      :+:    :+:   */
+/*   philo_error_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 12:06:30 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/24 16:03:59 by fbelotti         ###   ########.fr       */
+/*   Created: 2024/06/24 17:12:53 by fbelotti          #+#    #+#             */
+/*   Updated: 2024/06/24 17:21:57 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
-
-void	parsing_memory_liberation(t_data *data)
-{
-	free(data->time);
-	free(data);
-	exit (EXIT_FAILURE);
-}
 
 int	ft_isdigit(char c)
 {
@@ -28,13 +21,7 @@ int	ft_isdigit(char c)
 	return (0);
 }
 
-static void	atoi_limits_exit(t_data *data)
-{
-	printf("Philosophers: error: value out of bound\n");
-	parsing_memory_liberation(data);
-}
-
-int	ft_atoi(const char *str, t_data *data)
+long	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;
@@ -57,9 +44,7 @@ int	ft_atoi(const char *str, t_data *data)
 		i++;
 	}
 	result = result * sign;
-	if (result > INT_MAX || result < INT_MIN)
-		atoi_limits_exit(data);
-	return ((int)result);
+	return (result);
 }
 
 size_t	ft_strlen(const char *str)
@@ -68,8 +53,6 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/24 16:01:04 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:22:10 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@
 
 void	parse_data(int ac, char **av, t_data *data);
 
-/* Parsing_utils */
+/* Error_utils */
 
 int		ft_isdigit(char c);
-int		ft_atoi(const char *str, t_data *data);
+long	ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
-void	parsing_memory_liberation(t_data *data);
+
+/* Errors */
+
+int	manage_error(int ac, char **av);
 
 #endif
