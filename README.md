@@ -7,5 +7,4 @@
 <body>
     <header>
         <h1>42_cursus_philosophers</h1>
-        <p>A project to create a simple shell.</p>
     </header>
