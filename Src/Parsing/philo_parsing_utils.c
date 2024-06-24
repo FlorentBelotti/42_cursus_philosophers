@@ -6,11 +6,18 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 12:06:30 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/24 14:08:05 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:03:59 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
+
+void	parsing_memory_liberation(t_data *data)
+{
+	free(data->time);
+	free(data);
+	exit (EXIT_FAILURE);
+}
 
 int	ft_isdigit(char c)
 {
@@ -21,7 +28,13 @@ int	ft_isdigit(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+static void	atoi_limits_exit(t_data *data)
+{
+	printf("Philosophers: error: value out of bound\n");
+	parsing_memory_liberation(data);
+}
+
+int	ft_atoi(const char *str, t_data *data)
 {
 	int		i;
 	int		sign;
@@ -45,7 +58,7 @@ int	ft_atoi(const char *str)
 	}
 	result = result * sign;
 	if (result > INT_MAX || result < INT_MIN)
-		return (0);
+		atoi_limits_exit(data);
 	return ((int)result);
 }
 
