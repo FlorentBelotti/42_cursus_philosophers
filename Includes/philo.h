@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/24 17:22:10 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:05:49 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,17 @@
 
 /* Parsing */
 
-void	parse_data(int ac, char **av, t_data *data);
+void	get_args_value(int ac, char **av, t_data *data);
 
-/* Error_utils */
+/* Errors */
 
+int		manage_error(int ac, char **av);
 int		ft_isdigit(char c);
 long	ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
 
-/* Errors */
+/* Memory */
 
-int	manage_error(int ac, char **av);
+void	data_n_time_memory_allocation(t_data **data);
 
 #endif
