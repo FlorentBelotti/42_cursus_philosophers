@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/24 18:05:49 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:08:22 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@
 
 /* Parsing */
 
-void	get_args_value(int ac, char **av, t_data *data);
+void	get_args_values(int ac, char **av, t_data *data);
+void	get_philosophers_data(t_data **data);
 
 /* Errors */
 
@@ -48,6 +49,12 @@ size_t	ft_strlen(const char *str);
 
 /* Memory */
 
-void	data_n_time_memory_allocation(t_data **data);
+int		data_n_time_memory_allocation(t_data **data);
+int		philo_n_forks_memory_allocation(t_data **data);
+void	free_allocated_memory(t_data *data);
+
+/* Execution */
+
+int	check_table_n_guests(t_data *data);
 
 #endif

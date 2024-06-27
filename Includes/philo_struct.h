@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/23 18:41:29 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:07:01 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 # include <pthread.h>
 
 typedef pthread_mutex_t t_mtx;
+
+typedef enum e_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}	t_opcode;
 
 typedef struct s_time
 {
@@ -40,8 +51,9 @@ typedef struct s_philo
 
 	int			meals_nb;
 	int			last_meal;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
+	int			full;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
 	pthread_t	thread_id;
 } t_philo;
 
