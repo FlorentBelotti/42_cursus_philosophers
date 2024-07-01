@@ -3,32 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   philo_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:57:36 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 18:20:55 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 00:41:59 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
 
-void *philo_routine(void *arg)
+void	create_monitor_thread(t_data *data)
 {
-	t_data *data;
+	pthread_t	monitor_thread;
+	int	i;
 
-	data = (t_data *)arg;
-	while (data->table->simulation_state == -1)
+	i = 0;
+	pthread_create(&monitor_thread, NULL, monitor_routine, data->philo);
+	pthread_join(monitor_thread, NULL);
+	while (i < data->table->philo_nb)
 	{
-		philo_is_thinking(data);
-		philo_is_taking_a_fork(data);
-		philo_is_eating(data);
-		philo_is_dropping_a_fork(data);
-		philo_is_sleeping(data);
+		safe_thread_handle(&data->philo[i].thread_id, philo_routine, &data->philo[i], JOIN);
+		i++;
 	}
-	return (NULL);
 }
 
-void safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data, t_opcode opcode)
+void	create_philo_threads(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < data->table->philo_nb)
+	{
+		safe_thread_handle(&data->philo[i].thread_id, philo_routine, &data->philo[i], CREATE);
+		i++;
+	}
+}
+
+void	safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data, t_opcode opcode)
 {
 	if (CREATE == opcode)
 		pthread_create(thread, NULL, function, data);
@@ -36,19 +47,6 @@ void safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data
 		pthread_join(*thread, NULL);
 	else if (DETACH == opcode)
 		pthread_detach(*thread);
-}
-
-void create_philo_threads(t_data *data)
-{
-	int i;
-
-	i = 0;
-	while (i < data->table->philo_nb)
-	{
-		safe_thread_handle(&data->philo[i].thread_id, philo_routine(data),
-						   &data->philo[i], CREATE);
-		i++;
-	}
 }
 
 int handle_mutex(t_mtx *mutex, t_opcode opcode)

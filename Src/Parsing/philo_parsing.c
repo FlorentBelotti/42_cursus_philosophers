@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:42:28 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 18:23:05 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:07:03 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void get_args_values(int ac, char **av, t_data *data)
 	data->table->time_to_die = ft_atoi(av[2]);
 	data->table->time_to_eat = ft_atoi(av[3]);
 	data->table->time_to_sleep = ft_atoi(av[4]);
-	data->table->simulation_state = -1;
+	data->table->simulation_state = 1;
 	if (ac == 6)
 		data->table->meals_limits = ft_atoi(&av[5][1]);
 	else
@@ -49,6 +49,7 @@ void get_philosophers_data(t_data **data)
 		(*data)->philo[i].meals_nb = 0;
 		(*data)->philo[i].philo_id = i;
 		(*data)->philo[i].full = -1;
+		(*data)->philo[i].philo_state = 1;
 		assign_philosopher_forks(i, &(*data)->philo[i], data);
 		i++;
 	}

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:27:49 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 18:20:08 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 00:18:13 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/philo.h"
 
-/*static void	print_table(t_data *data)
+/*static void	print_time(t_data *data)
 {
 	int	i = -1;
 
 	printf("\n----- table -----\n\n");
 	printf("philo_nb : %d\n", data->table->philo_nb);
-	printf("table_to_die : %d\n", data->table->table_to_die);
+	printf("table_to_die : %d\n", data->table->time_to_die);
 	printf("time_to_eat : %d\n", data->table->time_to_eat);
 	printf("time_to_sleep : %d\n", data->table->time_to_sleep);
 	printf("meals_limits : %d\n\n", data->table->meals_limits);
@@ -33,18 +33,38 @@
 		printf("full : %d\n", data->philo[i].full);
 		printf("left_fork_id : %d\n", data->philo[i].first_fork->fork_id);
 		printf("right_fork_id : %d\n", data->philo[i].second_fork->fork_id);
-		printf("thread_id : %d\n\n", data->philo[i].thread_id);
+		//printf("thread_id : %d\n\n", data->philo[i].thread_id);
 	}
 }*/
+
+static int check_table_n_guests(t_data *data)
+{
+	if (data->table->meals_limits == 0)
+	{
+		printf("Philosopher: dinner: no food to eat! Everyone is dead...\n");
+		free_allocated_memory(data);
+		return (1);
+	}
+	if (data->table->philo_nb == 0)
+	{
+		printf("Philosopher: dinner: No one came! you have no friend...\n");
+		free_allocated_memory(data);
+		return (1);
+	}
+	return (0);
+}
 
 static int start_dinner(t_data *data)
 {
 	if (check_table_n_guests(data) == 1)
 		return (1);
-	/* if (data->table->philo_nb == 1)
-		TO_DO */
+//	if (data->table->philo_nb == 1)
+//		TO_DO
 	else
+	{
 		create_philo_threads(data);
+		create_monitor_thread(data);
+	}
 	return (0);
 }
 
@@ -71,7 +91,7 @@ int main(int ac, char **av)
 		return (1);
 	if (start_dinner(data) == 1)
 		return (1);
-	// print_time(data);
+	//print_time(data);
 	free_allocated_memory(data);
 	return (0);
 }

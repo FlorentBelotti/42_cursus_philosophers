@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 17:48:11 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 00:18:00 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,18 @@ int		handle_mutex(t_mtx *mutex, t_opcode opcode);
 
 /* Execution */
 
-int		check_table_n_guests(t_data *data);
 void	create_philo_threads(t_data *data);
-void	philo_is_thinking(t_data *data);
-void	philo_is_taking_a_fork(t_data *data);
-void	philo_is_eating(t_data *data);
-void	philo_is_dropping_a_fork(t_data *data);
-void	philo_is_sleeping(t_data *data);
+void	philo_is_thinking(t_philo *philo);
+void	philo_is_taking_a_fork(t_philo *philo);
+void	philo_is_eating(t_philo *philo);
+void	philo_is_dropping_a_fork(t_philo *philo);
+void	philo_is_sleeping(t_philo *philo);
 long	get_timestamp(void);
 void	safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data, t_opcode opcode);
-void	print_status(t_data *data, char *status);
+void	print_status(t_philo *philo, char *status);
 void	ft_usleep(int milliseconds);
+void	*philo_routine(void *arg);
+void	*monitor_routine(void *arg);
+void	create_monitor_thread(t_data *data);
 
 #endif

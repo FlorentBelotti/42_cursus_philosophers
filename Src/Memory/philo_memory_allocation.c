@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_memory_allocation.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:44:59 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 18:33:29 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 22:55:30 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,11 @@ void init_mutex(t_data **data)
 	int	i;
 
 	i = 0;
-	handle_mutex(&(*data)->print_mutex, INIT);
-	handle_mutex(&(*data)->death_mutex, INIT);
-	handle_mutex(&(*data)->meals_mutex, INIT);
+	handle_mutex(&(*data)->table->print_mutex, INIT);
+	handle_mutex(&(*data)->table->death_mutex, INIT);
+	handle_mutex(&(*data)->table->meals_mutex, INIT);
 	while (i < (*data)->table->philo_nb)
 	{
-		(*data)->philo[i].print_mutex = (*data)->print_mutex;
-		(*data)->philo[i].death_mutex = (*data)->death_mutex;
-		(*data)->philo[i].meals_mutex = (*data)->meals_mutex;
 		(*data)->philo[i].table = (*data)->table;
 		i++;
 	}

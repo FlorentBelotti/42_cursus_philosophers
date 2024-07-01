@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 18:33:14 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 01:05:59 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ typedef enum e_opcode
 
 typedef struct s_table
 {
-	int	philo_nb;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	meals_limits;
-	int	start_time;
-	int	simulation_state;
+	int			philo_nb;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			meals_limits;
+	int			start_time;
+	int			simulation_state;
+	t_mtx		death_mutex;
+	t_mtx		meals_mutex;
+	t_mtx		print_mutex;
 }	t_table;
 
 typedef struct s_fork
@@ -48,6 +51,7 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	int	philo_id;
+	int	philo_state;
 
 	int			meals_nb;
 	int			last_meal;
@@ -55,9 +59,6 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;
-	t_mtx		death_mutex;
-	t_mtx		meals_mutex;
-	t_mtx		print_mutex;
 	t_table		*table;
 } t_philo;
 
@@ -66,9 +67,6 @@ typedef struct s_data
 	struct s_table	*table;
 	struct s_philo	*philo;
 	struct s_fork	*fork;
-	t_mtx			death_mutex;
-	t_mtx			meals_mutex;
-	t_mtx			print_mutex;
 }	t_data;
 
 #endif
