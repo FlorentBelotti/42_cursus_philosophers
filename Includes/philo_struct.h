@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 15:40:24 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:33:14 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_opcode
 	DETACH,
 }	t_opcode;
 
-typedef struct s_time
+typedef struct s_table
 {
 	int	philo_nb;
 	int	time_to_die;
@@ -37,7 +37,7 @@ typedef struct s_time
 	int	meals_limits;
 	int	start_time;
 	int	simulation_state;
-}	t_time;
+}	t_table;
 
 typedef struct s_fork
 {
@@ -58,11 +58,12 @@ typedef struct s_philo
 	t_mtx		death_mutex;
 	t_mtx		meals_mutex;
 	t_mtx		print_mutex;
+	t_table		*table;
 } t_philo;
 
 typedef struct s_data
 {
-	struct s_time	*time;
+	struct s_table	*table;
 	struct s_philo	*philo;
 	struct s_fork	*fork;
 	t_mtx			death_mutex;

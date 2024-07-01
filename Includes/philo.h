@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 16:30:24 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:48:11 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ void	philo_is_eating(t_data *data);
 void	philo_is_dropping_a_fork(t_data *data);
 void	philo_is_sleeping(t_data *data);
 long	get_timestamp(void);
+void	safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data, t_opcode opcode);
+void	print_status(t_data *data, char *status);
+void	ft_usleep(int milliseconds);
 
 #endif
