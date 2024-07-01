@@ -6,11 +6,18 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:44:59 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/26 16:04:27 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:40:48 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
+
+void	init_mutex(t_data **data)
+{
+	handle_mutex(&(*data)->print_mutex, INIT);
+	handle_mutex(&(*data)->death_mutex, INIT);
+	handle_mutex(&(*data)->meals_mutex, INIT);
+}
 
 int	data_n_time_memory_allocation(t_data **data)
 {

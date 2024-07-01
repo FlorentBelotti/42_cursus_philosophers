@@ -6,13 +6,13 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:27:49 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/26 16:44:34 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:26:58 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/philo.h"
 
-static void	print_time(t_data *data)
+/*static void	print_time(t_data *data)
 {
 	int	i = -1;
 
@@ -35,12 +35,16 @@ static void	print_time(t_data *data)
 		printf("right_fork_id : %d\n", data->philo[i].second_fork->fork_id);
 		printf("thread_id : %d\n\n", data->philo[i].thread_id);
 	}
-}
+}*/
 
 static int	start_dinner(t_data *data)
 {
 	if (check_table_n_guests(data) == 1)
 		return (1);
+	/* if (data->time->philo_nb == 1)
+		TO_DO */
+	else
+		create_philo_threads(data);
 	return (0);
 }
 
@@ -52,6 +56,7 @@ static int	init_philosophers(int ac, char **av, t_data **data)
 	if (philo_n_forks_memory_allocation(data) == 1)
 		return (1);
 	get_philosophers_data(data);
+	init_mutex(data);
 	return (0);
 }
 
@@ -66,7 +71,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (start_dinner(data) == 1)
 		return (1);
-	print_time(data);
+	//print_time(data);
 	free_allocated_memory(data);
 	return (0);
 }

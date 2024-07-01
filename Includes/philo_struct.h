@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/26 12:07:01 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:40:24 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;
+	t_mtx		death_mutex;
+	t_mtx		meals_mutex;
+	t_mtx		print_mutex;
 } t_philo;
 
 typedef struct s_data
@@ -62,6 +65,9 @@ typedef struct s_data
 	struct s_time	*time;
 	struct s_philo	*philo;
 	struct s_fork	*fork;
+	t_mtx			death_mutex;
+	t_mtx			meals_mutex;
+	t_mtx			print_mutex;
 }	t_data;
 
 #endif

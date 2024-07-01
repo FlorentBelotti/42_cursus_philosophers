@@ -6,16 +6,11 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:13:50 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/26 16:58:21 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/01 12:13:48 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
-
-void	simulate_dinner(t_data *data)
-{
-	
-}
 
 int	check_table_n_guests(t_data *data)
 {
