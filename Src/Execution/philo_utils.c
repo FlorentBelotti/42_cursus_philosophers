@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 17:34:06 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 01:21:32 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:15:45 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void print_status(t_philo *philo, char *status)
 
 	timestamp = get_timestamp();
 	handle_mutex(&(philo)->table->print_mutex, LOCK);
-	if (philo->philo_state == 1)
+	if (philo->table->simulation_state == 1)
 		printf("%ld %d %s\n", timestamp, philo->philo_id, status);
 	handle_mutex(&(philo)->table->print_mutex, UNLOCK);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:57:36 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 00:41:59 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:02:33 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	create_philo_threads(t_data *data)
 	int i;
 
 	i = 0;
+	data->table->start_time = get_timestamp();
 	while (i < data->table->philo_nb)
 	{
 		safe_thread_handle(&data->philo[i].thread_id, philo_routine, &data->philo[i], CREATE);

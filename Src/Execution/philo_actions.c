@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_routine.c                                    :+:      :+:    :+:   */
+/*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:12:48 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 22:50:13 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:54:37 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void philo_is_taking_a_fork(t_philo *philo)
 	handle_mutex(&(philo)->first_fork->fork, LOCK);
 	print_status(philo, "has taken a fork");
 	handle_mutex(&(philo)->second_fork->fork, LOCK);
-	print_status(philo, "has taken a second fork");
+	print_status(philo, "has taken a fork");
 }
 
 void philo_is_eating(t_philo *philo)
 {
 	handle_mutex(&(philo)->table->death_mutex, LOCK);
-	philo->last_meal = get_timestamp();
 	print_status(philo, "is eating");
 	handle_mutex(&(philo)->table->death_mutex, UNLOCK);
 	ft_usleep(philo->table->time_to_eat);
+	philo->last_meal = get_timestamp();
 	handle_mutex(&(philo)->table->meals_mutex, LOCK);
 	philo->meals_nb++;
 	handle_mutex(&(philo)->table->meals_mutex, UNLOCK);

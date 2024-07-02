@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 01:05:59 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:07:47 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef enum e_opcode
 typedef struct s_table
 {
 	int			philo_nb;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
 	int			meals_limits;
-	int			start_time;
+	long		start_time;
 	int			simulation_state;
 	t_mtx		death_mutex;
 	t_mtx		meals_mutex;
@@ -51,10 +51,9 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	int	philo_id;
-	int	philo_state;
 
 	int			meals_nb;
-	int			last_meal;
+	long		last_meal;
 	int			full;
 	t_fork		*first_fork;
 	t_fork		*second_fork;
