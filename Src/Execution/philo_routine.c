@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 00:11:08 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 15:53:21 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:47:27 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void *philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->last_meal = get_timestamp();
 	while (philo->table->simulation_state == 1)
 	{
 		philo_is_taking_a_fork(philo);
@@ -35,15 +34,12 @@ void	*monitor_routine(void *arg)
 	int		i;
 
 	philo = (t_philo *)arg;
+	handle_mutex(&(philo)->table->death_mutex, LOCK);
 	while (philo->table->simulation_state == 1)
 	{
 		i = 0;
 		while (i < philo->table->philo_nb)
 		{
-			handle_mutex(&(philo)->table->death_mutex, LOCK);
-			//handle_mutex(&(philo)->table->print_mutex, LOCK);
-			//printf("philo_id : %d\t last_meal : %ld time_to_die : %ld real_time : %ld\n", i, (get_timestamp() - philo[i].last_meal), philo->table->time_to_die, (get_timestamp() - philo->table->start_time));
-			//handle_mutex(&(philo)->table->print_mutex, UNLOCK);
 			if ((get_timestamp() - philo[i].last_meal) > philo->table->time_to_die)
 			{
 				philo->table->simulation_state = 0;

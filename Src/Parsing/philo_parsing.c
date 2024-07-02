@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:42:28 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 14:32:00 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:15:44 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void get_philosophers_data(t_data **data)
 		(*data)->philo[i].meals_nb = 0;
 		(*data)->philo[i].philo_id = i;
 		(*data)->philo[i].full = -1;
+		(*data)->philo[i].last_meal = get_timestamp();
 		assign_philosopher_forks(i, &(*data)->philo[i], data);
 		i++;
 	}

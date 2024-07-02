@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:57:36 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 15:02:33 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:07:48 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void	create_philo_threads(t_data *data)
 
 	i = 0;
 	data->table->start_time = get_timestamp();
+	handle_mutex(&(data)->table->death_mutex, LOCK);
 	while (i < data->table->philo_nb)
 	{
 		safe_thread_handle(&data->philo[i].thread_id, philo_routine, &data->philo[i], CREATE);
 		i++;
 	}
+	handle_mutex(&(data)->table->death_mutex, UNLOCK);
 }
 
 void	safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data, t_opcode opcode)
