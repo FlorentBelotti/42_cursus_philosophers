@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 19:15:52 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:43:56 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_table
 	t_mtx		death_mutex;
 	t_mtx		meals_mutex;
 	t_mtx		print_mutex;
+	t_mtx		state_mutex;
 }	t_table;
 
 typedef struct s_fork

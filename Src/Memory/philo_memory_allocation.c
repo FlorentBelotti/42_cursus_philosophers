@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:44:59 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 19:56:29 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 00:43:50 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_mutex(t_data **data)
 	handle_mutex(&(*data)->table->print_mutex, INIT);
 	handle_mutex(&(*data)->table->death_mutex, INIT);
 	handle_mutex(&(*data)->table->meals_mutex, INIT);
+	handle_mutex(&(*data)->table->state_mutex, INIT);
 	while (i < (*data)->table->philo_nb)
 	{
 		(*data)->philo[i].table = (*data)->table;

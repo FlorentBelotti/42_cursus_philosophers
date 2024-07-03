@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 17:34:06 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 19:51:42 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 01:39:01 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	print_status(t_philo *philo, int statcode)
 
 	timestamp = get_timestamp();
 	handle_mutex(&(philo)->table->print_mutex, LOCK);
+	handle_mutex(&(philo)->table->state_mutex, LOCK);
 	if (philo->table->simulation_state == 1)
 	{
 		if (statcode == EATING)
@@ -50,5 +51,6 @@ void	print_status(t_philo *philo, int statcode)
 			printf("%ld \t%d \t\033[38;5;201m%s\033[0m\n", timestamp,
 				philo->philo_id, "is sleeping");
 	}
+	handle_mutex(&(philo)->table->state_mutex, UNLOCK);
 	handle_mutex(&(philo)->table->print_mutex, UNLOCK);
 }

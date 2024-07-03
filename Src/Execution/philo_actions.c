@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 15:12:48 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 19:53:11 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 01:41:33 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void	philo_is_eating(t_philo *philo)
 {
 	print_status(philo, EATING);
 	ft_usleep(philo->table->time_to_eat);
+	handle_mutex(&(philo)->table->meals_mutex, LOCK);
 	philo->last_meal = get_timestamp();
 	philo->meals_nb++;
+	handle_mutex(&(philo)->table->meals_mutex, UNLOCK);
 }
 
 void	philo_is_dropping_a_fork(t_philo *philo)
