@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 00:11:08 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 17:47:27 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:52:54 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
 
-void *philo_routine(void *arg)
+void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
@@ -31,26 +31,19 @@ void *philo_routine(void *arg)
 void	*monitor_routine(void *arg)
 {
 	t_philo	*philo;
-	int		i;
 
 	philo = (t_philo *)arg;
 	handle_mutex(&(philo)->table->death_mutex, LOCK);
 	while (philo->table->simulation_state == 1)
 	{
-		i = 0;
-		while (i < philo->table->philo_nb)
+		if (is_philosopher_dead(philo) == 1)
+			return (NULL);
+		if (philo->table->meals_limits != -1)
+			is_philosopher_full(philo);
+		if (are_all_philosophers_full(philo) == 1)
 		{
-			if ((get_timestamp() - philo[i].last_meal) > philo->table->time_to_die)
-			{
-				philo->table->simulation_state = 0;
-				handle_mutex(&(philo)->table->print_mutex, LOCK);
-				printf("\033[1;31m%ld %d %s\033[0m\n", get_timestamp(), philo[i].philo_id, "has died");
-				handle_mutex(&(philo)->table->print_mutex, UNLOCK);
-				handle_mutex(&(philo)->table->death_mutex, UNLOCK);
-				return (NULL);
-			}
-			handle_mutex(&(philo)->table->death_mutex, UNLOCK);
-			i++;
+			philo->table->simulation_state = 0;
+			return (NULL);
 		}
 	}
 	return (NULL);

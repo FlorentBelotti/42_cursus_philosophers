@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:49:39 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/06/24 17:22:32 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:02:04 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,11 @@ static int	check_av_value(char *av)
 	return (0);
 }
 
-static int	check_last_arg(char *av)
+static int	check_for_numeric_value(char *av, int len)
 {
-	int		i;
-	int		len;
-	long	value;
+	int	i;
 
 	i = 0;
-	len = ft_strlen(av);
-	if (av[i] != '[' || av[len - 1] != ']')
-	{
-		printf("Philosophers: error: invalid format for meals limit\n");
-		return (1);
-	}
-	i = 1;
 	while (av[i] && i < len - 1)
 	{
 		if (ft_isdigit(av[i]))
@@ -61,6 +52,17 @@ static int	check_last_arg(char *av)
 			return (1);
 		}
 	}
+	return (0);
+}
+
+static int	check_last_arg(char *av)
+{
+	int		len;
+	long	value;
+
+	len = ft_strlen(av);
+	if (check_for_numeric_value(av, len) == 1)
+		return (1);
 	value = ft_atoi(&av[1]);
 	if (value > INT_MAX || value < INT_MIN)
 	{

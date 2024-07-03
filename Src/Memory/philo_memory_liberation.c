@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   philo_memory_liberation.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:46:40 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/01 18:22:06 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:53:43 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
 
-void free_allocated_memory(t_data *data)
+void	free_allocated_memory(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (data->fork)

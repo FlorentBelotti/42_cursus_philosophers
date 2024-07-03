@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 00:18:00 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:16:17 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ void	philo_is_eating(t_philo *philo);
 void	philo_is_dropping_a_fork(t_philo *philo);
 void	philo_is_sleeping(t_philo *philo);
 long	get_timestamp(void);
-void	safe_thread_handle(pthread_t *thread, void *(*function)(void *), void *data, t_opcode opcode);
-void	print_status(t_philo *philo, char *status);
+void	safe_thread_handle(pthread_t *thread, void *(*function)(void *),
+			void *data, t_opcode opcode);
+void	print_status(t_philo *philo, int statcode);
 void	ft_usleep(int milliseconds);
 void	*philo_routine(void *arg);
 void	*monitor_routine(void *arg);
 void	create_monitor_thread(t_data *data);
+int		is_philosopher_dead(t_philo *philo);
+void	is_philosopher_full(t_philo *philo);
+int		are_all_philosophers_full(t_philo *philo);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/02 15:07:47 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:15:52 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 
 # include <pthread.h>
 
-typedef pthread_mutex_t t_mtx;
+typedef pthread_mutex_t	t_mtx;
+
+typedef enum e_statcode
+{
+	EATING,
+	THINKING,
+	TAKING,
+	SLEEPING,
+}	t_statcode;
 
 typedef enum e_opcode
 {
@@ -46,12 +54,11 @@ typedef struct s_fork
 {
 	t_mtx	fork;
 	int		fork_id;
-} t_fork;
+}	t_fork;
 
 typedef struct s_philo
 {
-	int	philo_id;
-
+	int			philo_id;
 	int			meals_nb;
 	long		last_meal;
 	int			full;
@@ -59,7 +66,7 @@ typedef struct s_philo
 	t_fork		*second_fork;
 	pthread_t	thread_id;
 	t_table		*table;
-} t_philo;
+}	t_philo;
 
 typedef struct s_data
 {
