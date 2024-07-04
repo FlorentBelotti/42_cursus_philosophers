@@ -18,7 +18,9 @@ void	*philo_routine(void *arg)
 	int		state;
 
 	philo = (t_philo *)arg;
+	handle_mutex(&(philo)->table->state_mutex, LOCK);
 	state = philo->table->simulation_state;
+	handle_mutex(&(philo)->table->state_mutex, UNLOCK);
 	while (state == 1)
 	{
 		philo_is_taking_a_fork(philo);
@@ -39,7 +41,9 @@ void	*monitor_routine(void *arg)
 	int		state;
 
 	philo = (t_philo *)arg;
+	handle_mutex(&(philo)->table->state_mutex, LOCK);
 	state = philo->table->simulation_state;
+	handle_mutex(&(philo)->table->state_mutex, UNLOCK);
 	while (state == 1)
 	{
 		is_philosopher_dead(philo);
@@ -48,7 +52,7 @@ void	*monitor_routine(void *arg)
 		handle_mutex(&(philo)->table->state_mutex, LOCK);
 		state = philo->table->simulation_state;
 		handle_mutex(&(philo)->table->state_mutex, UNLOCK);
-		//ft_usleep(100);
+		ft_usleep(100);
 	}
 	return (NULL);
 }

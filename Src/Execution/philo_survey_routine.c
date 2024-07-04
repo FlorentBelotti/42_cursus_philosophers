@@ -46,14 +46,15 @@ void	is_philosopher_dead(t_philo *philo)
 		handle_mutex(&(philo)->table->meals_mutex, UNLOCK);
 		if (last_meal > philo->table->time_to_die)
 		{
+			handle_mutex(&(philo)->table->death_mutex, LOCK);
 			handle_mutex(&(philo)->table->state_mutex, LOCK);
 			philo->table->simulation_state = 0;
 			handle_mutex(&(philo)->table->state_mutex, UNLOCK);
 			print_status(&philo[i], DEAD);
+			handle_mutex(&(philo)->table->death_mutex, UNLOCK);
 			return ;
 		}
 		i++;
-		handle_mutex(&(philo)->table->death_mutex, UNLOCK);
 	}
 }
 
