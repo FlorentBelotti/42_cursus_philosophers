@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:24:47 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 15:18:05 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:30:59 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void	meals_monitoring(t_philo *philo)
 		if (philo->full == 1)
 			i++;
 		else
-			break;
+			break ;
 	}
 	if (i == philo->table->philo_nb)
 	{
 		handle_mutex(&(philo)->table->state_mutex, LOCK);
 		philo->table->simulation_state = 0;
 		handle_mutex(&(philo)->table->state_mutex, UNLOCK);
-		print_status(philo, FULL);
+		print_end(philo, FULL);
+		return ;
 	}
 }
 
@@ -50,14 +51,10 @@ void	is_philosopher_dead(t_philo *philo)
 			handle_mutex(&(philo)->table->state_mutex, LOCK);
 			philo->table->simulation_state = 0;
 			handle_mutex(&(philo)->table->state_mutex, UNLOCK);
-			print_status(&philo[i], DEAD);
+			print_end(&philo[i], DEAD);
 			handle_mutex(&(philo)->table->death_mutex, UNLOCK);
 			return ;
 		}
 		i++;
 	}
 }
-
-/*handle_mutex(&(philo)->table->print_mutex, LOCK);
-printf("id : %d	time_to_die : %ld last_meal : %ld	real_time %ld\n", philo[i].philo_id, philo->table->time_to_die, last_meal,  (get_timestamp() - philo->table->start_time));
-handle_mutex(&(philo)->table->print_mutex, UNLOCK);*/

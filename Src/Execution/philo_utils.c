@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 17:34:06 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 15:14:42 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:35:42 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,39 @@ long	get_timestamp(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
+void	print_end(t_philo *philo, int statcode)
+{
+	long	timestamp;
+	int		state;
+
+	handle_mutex(&(philo)->table->print_mutex, LOCK);
+	timestamp = get_timestamp() - philo->table->start_time;
+	handle_mutex(&(philo)->table->state_mutex, LOCK);
+	state = philo->table->simulation_state;
+	handle_mutex(&(philo)->table->state_mutex, UNLOCK);
+	if (state == 0 && (statcode == FULL || statcode == DEAD))
+	{
+		if (statcode == FULL)
+			printf("\033[1;32m%ld \tphilosophers have eaten %d times\033[0m\n",
+				timestamp, philo->table->meals_limits);
+		else if (statcode == DEAD)
+			printf("\033[1;31m%ld \t%d \t%s\033[0m\n", timestamp,
+				philo->philo_id, "has died");
+	}
+	handle_mutex(&(philo)->table->print_mutex, UNLOCK);
+}
+
 void	print_status(t_philo *philo, int statcode)
 {
 	long	timestamp;
 	int		state;
 
+	handle_mutex(&(philo)->table->print_mutex, LOCK);
 	timestamp = get_timestamp() - philo->table->start_time;
 	handle_mutex(&(philo)->table->state_mutex, LOCK);
 	state = philo->table->simulation_state;
 	handle_mutex(&(philo)->table->state_mutex, UNLOCK);
-	handle_mutex(&(philo)->table->print_mutex, LOCK);
-	if (state == 0 && (statcode == FULL || statcode == DEAD))
-	{
-		if (statcode == FULL)
-		printf("\033[1;32m%ld \tEND \tall philosophers have eaten %d time(s)\033[0m\n", timestamp,
-			philo->table->meals_limits);
-		else if (statcode == DEAD)
-		printf("\033[1;31m%ld \t%d \t%s\033[0m\n", timestamp,
-			philo->philo_id, "has died");
-	}
-	else if (state == 1)
+	if (state == 1)
 	{
 		if (statcode == EATING)
 			printf("%ld \t%d \t\033[38;5;226m%s\033[0m\n", timestamp,

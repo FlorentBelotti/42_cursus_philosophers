@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:27:49 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 19:57:59 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:28:50 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ static int	start_dinner(t_data *data)
 {
 	if (check_table_n_guests(data) == 1)
 		return (1);
-//	if (data->table->philo_nb == 1)
-//		TO_DO
+	if (data->table->philo_nb == 1)
+	{
+		data->table->start_time = get_timestamp();
+		safe_thread_handle(&data->philo[0].thread_id, lone_philosopher_routine,
+			&data->philo[0], CREATE);
+		create_monitor_thread(data);
+	}
 	else
 	{
 		create_philo_threads(data);
@@ -69,7 +74,6 @@ int	main(int ac, char **av)
 		return (1);
 	if (start_dinner(data) == 1)
 		return (1);
-	//print_time(data);
 	free_allocated_memory(data);
 	return (0);
 }

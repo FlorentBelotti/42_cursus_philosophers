@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 13:52:00 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:23:52 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ long	get_timestamp(void);
 void	safe_thread_handle(pthread_t *thread, void *(*function)(void *),
 			void *data, t_opcode opcode);
 void	print_status(t_philo *philo, int statcode);
+void	print_end(t_philo *philo, int statcode);
 void	ft_usleep(int milliseconds);
 void	*philo_routine(void *arg);
 void	*monitor_routine(void *arg);
 void	create_monitor_thread(t_data *data);
 void	is_philosopher_dead(t_philo *philo);
 void	meals_monitoring(t_philo *philo);
+void	*lone_philosopher_routine(void *arg);
 
 #endif

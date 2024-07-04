@@ -6,11 +6,21 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 00:11:08 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 13:52:15 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:24:58 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/philo.h"
+
+void	*lone_philosopher_routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	print_status(&philo[0], TAKING);
+	ft_usleep(philo->table->time_to_die);
+	return (NULL);
+}
 
 void	*philo_routine(void *arg)
 {
