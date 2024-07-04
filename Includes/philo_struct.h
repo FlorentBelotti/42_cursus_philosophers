@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:57 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 00:43:56 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:00:57 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef enum e_statcode
 	THINKING,
 	TAKING,
 	SLEEPING,
+	DEAD,
+	FULL,
 }	t_statcode;
 
 typedef enum e_opcode

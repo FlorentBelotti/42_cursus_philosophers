@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 00:11:08 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 01:54:22 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:52:15 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
+	int		state;
 
 	philo = (t_philo *)arg;
-	while (philo->table->simulation_state == 1)
+	state = philo->table->simulation_state;
+	while (state == 1)
 	{
 		philo_is_taking_a_fork(philo);
 		philo_is_eating(philo);
 		philo_is_dropping_a_fork(philo);
 		philo_is_sleeping(philo);
 		philo_is_thinking(philo);
+		handle_mutex(&(philo)->table->state_mutex, LOCK);
+		state = philo->table->simulation_state;
+		handle_mutex(&(philo)->table->state_mutex, UNLOCK);
 	}
 	return (NULL);
 }
@@ -31,25 +36,19 @@ void	*philo_routine(void *arg)
 void	*monitor_routine(void *arg)
 {
 	t_philo	*philo;
+	int		state;
 
 	philo = (t_philo *)arg;
-	while (philo->table->simulation_state == 1)
+	state = philo->table->simulation_state;
+	while (state == 1)
 	{
-		handle_mutex(&(philo)->table->meals_mutex, LOCK);
-		handle_mutex(&(philo)->table->death_mutex, LOCK);
-		if (is_philosopher_dead(philo) == 1)
-			return (NULL);
-		handle_mutex(&(philo)->table->death_mutex, UNLOCK);
+		is_philosopher_dead(philo);
 		if (philo->table->meals_limits != -1)
-			is_philosopher_full(philo);
-		handle_mutex(&(philo)->table->meals_mutex, UNLOCK);
-		if (are_all_philosophers_full(philo) == 1)
-		{
-			handle_mutex(&(philo)->table->state_mutex, LOCK);
-			philo->table->simulation_state = 0;
-			handle_mutex(&(philo)->table->state_mutex, UNLOCK);
-			return (NULL);
-		}
+			meals_monitoring(philo);
+		handle_mutex(&(philo)->table->state_mutex, LOCK);
+		state = philo->table->simulation_state;
+		handle_mutex(&(philo)->table->state_mutex, UNLOCK);
+		//ft_usleep(100);
 	}
 	return (NULL);
 }

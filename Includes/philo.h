@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:03:52 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 19:16:17 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:52:00 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	ft_usleep(int milliseconds);
 void	*philo_routine(void *arg);
 void	*monitor_routine(void *arg);
 void	create_monitor_thread(t_data *data);
-int		is_philosopher_dead(t_philo *philo);
-void	is_philosopher_full(t_philo *philo);
-int		are_all_philosophers_full(t_philo *philo);
+void	is_philosopher_dead(t_philo *philo);
+void	meals_monitoring(t_philo *philo);
 
 #endif
