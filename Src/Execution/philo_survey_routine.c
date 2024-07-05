@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:24:47 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 17:30:59 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:14:46 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	meals_monitoring(t_philo *philo)
 {
 	int	i;
+	int	full;
 
 	i = 0;
 	while (i < philo->table->philo_nb)
 	{
-		if (philo->full == 1)
+		handle_mutex(&(philo)->table->meals_mutex, LOCK);
+		full = philo->full;
+		handle_mutex(&(philo)->table->meals_mutex, UNLOCK);
+		if (full == 1)
 			i++;
 		else
 			break ;
