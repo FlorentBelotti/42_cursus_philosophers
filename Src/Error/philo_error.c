@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbelotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:49:39 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/03 20:02:04 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/05 23:46:41 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	manage_error(int ac, char **av)
 	int	i;
 
 	i = 1;
-	if (ac < 4 || ac > 6)
+	if (ac < 5 || ac > 6)
 	{
 		printf("Philosophers: error: invalid number of arguments\n");
 		return (1);

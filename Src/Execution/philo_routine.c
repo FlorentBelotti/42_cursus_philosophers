@@ -6,7 +6,7 @@
 /*   By: fbelotti <marvin@42perpignan.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 00:11:08 by fbelotti          #+#    #+#             */
-/*   Updated: 2024/07/04 17:24:58 by fbelotti         ###   ########.fr       */
+/*   Updated: 2024/07/05 23:46:49 by fbelotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	*monitor_routine(void *arg)
 		handle_mutex(&(philo)->table->state_mutex, LOCK);
 		state = philo->table->simulation_state;
 		handle_mutex(&(philo)->table->state_mutex, UNLOCK);
-		ft_usleep(100);
 	}
 	return (NULL);
 }
